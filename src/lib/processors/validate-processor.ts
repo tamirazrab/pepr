@@ -67,7 +67,7 @@ export async function validateProcessor(
 
   // If the resource is a secret, decode the data
   if (req.kind.version === "v1" && req.kind.kind === "Secret") {
-    convertFromBase64Map(wrapped.Raw as unknown as kind.Secret);
+    convertFromBase64Map(wrapped.Raw as Partial<kind.Secret>);
   }
 
   Log.info(reqMetadata, `Processing validation request`);

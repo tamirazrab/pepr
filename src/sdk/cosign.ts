@@ -273,7 +273,7 @@ export async function verifyImage(
       ctlogs: [],
       timestampAuthorities: [],
       certificateAuthorities: [],
-    } as unknown as TrustedRoot;
+    } as Omit<TrustedRoot, "mediaType">;
 
     const keys = {
       hint: {
@@ -281,7 +281,8 @@ export async function verifyImage(
         keyDetails: PublicKeyDetails.PKIX_ECDSA_P256_SHA_256,
       },
     };
-    const trustMaterial = toTrustMaterial(trustedRoot, keys);
+
+    const trustMaterial = toTrustMaterial(trustedRoot as TrustedRoot, keys);
 
     const subject = new Verifier(trustMaterial, {
       ctlogThreshold: 0,
